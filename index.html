@@ -5,22 +5,14 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <script src="js/angular.min.js"></script>
   <script src="js/ui-bootstrap-tpls-0.11.2.min.js"></script>
-</head>
-<body ng-controller="AppCtrl">
 
-<h1>angular-modal</h1>
-<div ng-click="openModal()">test</div>
 
 <script>
-
   var app = angular.module('app',['ui.bootstrap']);
-
   app.controller('AppCtrl', function($scope, $modal) {
-
     $scope.openModal=function() {
-
 //      alert('hello');
-      $modal.open({
+      var modalInstance = $modal.open({
         templateUrl: "html/sub1.html",
         controller: "ModalInstanceCtrl",
         scope: $scope,
@@ -28,12 +20,24 @@
       });
     };
   });
+  app.controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
 
-  app.controller('ModalInstanceCtrl', function ($scope) {
+    $scope.ok = function () {
+      $modalInstance.close();
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
 
   });
-
 </script>
+
+</head>
+<body ng-controller="AppCtrl">
+
+<h1>angular-modal</h1>
+<div class="btn btn-default" ng-click="openModal()">test</div>
 
 </body>
 </html>
